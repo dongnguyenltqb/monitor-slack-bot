@@ -1,0 +1,8 @@
+.git
+go.sum
+./bin
+log/*
+thitcho
+hls
+.log
+config.yaml

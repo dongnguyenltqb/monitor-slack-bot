@@ -1,0 +1,21 @@
+host:
+  ip: "127.0.0.1"
+  addr: "https://dongnguyen.dev/"
+  name: "macbook pro 2015"
+  port: 8000
+
+infra:
+
+risk:
+  cpu:
+    percent: 10
+  ram:
+    percent: 10
+
+bot:
+  slack:
+    monitor_channel: "id of channel"
+    log_channel: "id of log channel"
+    token: "bearer token of slack bot"
+    url:
+      post_message: "https://slack.com/api/chat.postMessage"
