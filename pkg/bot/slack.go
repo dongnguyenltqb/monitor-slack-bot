@@ -33,10 +33,8 @@ func GetSlackBot() *SlackBot {
 	return &slackBot
 }
 
-func (bot *SlackBot) SendMonitorStatusMessage(message string) {
-	token := bot.Token
+func (bot *SlackBot) StructMonitorStatusMessage(message string) string {
 	channel := bot.MonitorChannnel
-	url := bot.PostMessageURL
 	str := `{
   "channel": "` + channel + `",
   "blocks": [
@@ -70,28 +68,14 @@ func (bot *SlackBot) SendMonitorStatusMessage(message string) {
     }
   ]
 }`
-	fmt.Println(str)
-	client := &http.Client{}
-	req, err := http.NewRequest("POST", url, bytes.NewReader([]byte(str)))
-	req.Header.Set("Authorization", token)
-	req.Header.Set("Content-Type", "application/json;charset=utf-8")
-	resp, err := client.Do(req)
-	if err != nil {
-		panic(err)
-	}
-	defer resp.Body.Close()
+	return str
 }
 
-func (bot *SlackBot) SendBlockMessage(block string) {
+func (bot *SlackBot) SendMessage(message string) {
 	token := bot.Token
-	channel := bot.LogChannel
 	url := bot.PostMessageURL
-	str := `{
-		"channel": "` + channel + `",
-		"blocks":` + block + `
-	}`
 	client := &http.Client{}
-	req, err := http.NewRequest("POST", url, bytes.NewReader([]byte(str)))
+	req, err := http.NewRequest("POST", url, bytes.NewReader([]byte(message)))
 	req.Header.Set("Authorization", token)
 	req.Header.Set("Content-Type", "application/json;charset=utf-8")
 	resp, err := client.Do(req)

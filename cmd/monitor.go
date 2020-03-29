@@ -14,12 +14,13 @@ var monitorCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		bot.SetupSlackBot()
 		for {
-			<-time.After(5 * time.Second)
+			<-time.After(3 * time.Second)
 			if message, status := monitor.Check(monitor.Get()); status {
 				message = "💀 STATUS : RISK \r\n " + message
 				fmt.Println(message)
 				fmt.Println("====> dang gui message to slack")
-				bot.GetSlackBot().SendMonitorStatusMessage(message)
+				message = bot.GetSlackBot().StructMonitorStatusMessage(message)
+				bot.GetSlackBot().SendMessage(message)
 			}
 
 		}
