@@ -57,7 +57,7 @@ func Check(d SystemInfo) (message string, status bool) {
 			status = true
 		}
 	}
-	message += fmt.Sprintf("♨️  RAM : %vGB\r\n", d.RAM.Total/1024/1024/1024)
+	message += fmt.Sprintf("♨️  RAM : %vMB\r\n", d.RAM.Total/1024/1024)
 	message += fmt.Sprintf("♨️  USED RAM : %v%%", math.Floor(d.RAM_PERCENT))
 
 	if d.RAM_PERCENT > float64(ramRisk) {
