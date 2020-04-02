@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"thitcho/pkg/bot"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
@@ -20,6 +21,9 @@ var serverCmd = &cobra.Command{
 
 func boot() {
 	app := gin.Default()
+	app.GET("/", func(c *gin.Context) {
+		c.String(200, fmt.Sprintf("Bây giờ là : %v", time.Now().UTC().String()))
+	})
 	bot.GetSlackBotHandler().SetupBotHandler(app)
 	port := viper.GetViper().GetString(`host.port`)
 	app.Run(fmt.Sprintf(":%v", port))

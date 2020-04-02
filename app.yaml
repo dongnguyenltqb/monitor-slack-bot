@@ -1,0 +1,9 @@
+runtime: go112
+
+env_variables:
+  PORT: 8080
+
+network:
+  session_affinity: true
+  forwarded_ports:
+    - 8080:6789
